@@ -1,3 +1,5 @@
+import socket
+
 from src.adapters.io import SocketIO
 from src.client.client_configurate import ClientSocketConfigurate
 
@@ -22,12 +24,15 @@ class ClientSocketIO:
         await self.get_information_for_server()
 
     async def send_information_for_server(self):
-        if value := self.client_io.socket_input.value:
-            self.client.socket.send(value.encode())
+        if self.client_io.socket_input.value:
+            self.client.socket.send(self.client_io.socket_input.value.encode())
             await self.client_io.socket_input.run_thread()
 
     async def get_information_for_server(self):
-        request = self.client.socket.recv(1024).decode()
+        try:
+            request = self.client.socket.recv(1024).decode()
+        except socket.timeout:
+            return
         if request:
             await self.client_io.socket_output.write_message(
                 f'Message from server {request}'

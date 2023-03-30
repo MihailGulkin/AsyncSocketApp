@@ -18,17 +18,18 @@ class ServerSocketIO:
     async def accept(self):
         try:
             client_socket, client_address = self.server.socket.accept()
-            self.clients.append(
-                AcceptedClient(
-                    client_name=f'client_{len(self.clients)}',
-                    client_socket=client_socket,
-                    client_address=client_address
-                ))
-            await self.server_io.socket_output.write_message(
-                f"Client connected from {self.clients[-1].client_address}"
-            )
         except socket.timeout:
-            pass
+            return
+        self.clients.append(
+            AcceptedClient(
+                client_name=f'client_{len(self.clients)}',
+                client_socket=client_socket,
+                client_address=client_address
+            ))
+        self.clients[-1].client_socket.settimeout(0.2)
+        await self.server_io.socket_output.write_message(
+            f"Client connected from {self.clients[-1].client_address}"
+        )
 
     async def _close_all_connection(self):
         for client in self.clients:
@@ -38,10 +39,10 @@ class ServerSocketIO:
         if self.server_io.socket_input.value == 'exit':
             await self._close_all_connection()
             exit()
-        await self.send_information_for_clients()
-        await self.get_information_for_clients()
+        await self._send_information_for_clients()
+        await self._get_information_for_clients()
 
-    async def send_information_for_clients(self):
+    async def _send_information_for_clients(self):
         if self.server_io.socket_input.value:
             for client in self.clients:
                 client.client_socket.send(
@@ -49,15 +50,20 @@ class ServerSocketIO:
                 )
             await self.server_io.socket_input.run_thread()
 
-    async def get_information_for_clients(self):
+    async def _get_information_for_clients(self):
         for client in self.clients:
-            request = client.client_socket.recv(1024).decode()
+            try:
+                request = client.client_socket.recv(1024).decode()
+            except socket.timeout:
+                continue
+
             if not client.is_have_name:
                 client.client_name = f'{client.client_name} - {request}'
+                client.is_have_name = True
                 await self.server_io.socket_output.write_message(
                     f'{client.client_name} send hi'
                 )
-                return
+                continue
 
             if request:
                 await self.server_io.socket_output.write_message(

@@ -17,7 +17,7 @@ class SocketClientRunner:
             client_name=client_name
         )
         socket_io = SocketIO(
-            file_name=fr'{Config.MESSAGES_DIR}\\{client_name}.txt'
+            file_name=fr'{Config.MESSAGES_DIR}\\client_{client_name}.txt'
         )
         client_socket_io = ClientSocketIO(
             client=client_config,

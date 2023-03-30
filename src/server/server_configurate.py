@@ -13,7 +13,7 @@ class ServerSocketConfigurate(BaseSocket):
 
     def _configurate_socket(self) -> socket:
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.settimeout(0.2)
+        server_socket.settimeout(0.1)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((self.address.host, self.address.port))
         server_socket.listen(5)

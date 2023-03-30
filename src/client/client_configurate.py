@@ -17,6 +17,7 @@ class ClientSocketConfigurate(BaseSocket):
 
     def _configurate_socket(self) -> socket:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.settimeout(0.2)
         client_socket.connect((Config.SERVER_HOST, Config.SERVER_PORT))
         client_socket.send(self.client_name.encode())
 
