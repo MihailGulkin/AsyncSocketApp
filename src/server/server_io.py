@@ -38,11 +38,8 @@ class ServerSocketIO:
         if self.server_io.socket_input.value == 'exit':
             await self._close_all_connection()
             exit()
-        print('Before send info')
         await self.send_information_for_clients()
-        print('After send inf')
         await self.get_information_for_clients()
-        print('After get info and send info')
 
     async def send_information_for_clients(self):
         if self.server_io.socket_input.value:
