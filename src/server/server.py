@@ -27,5 +27,4 @@ class SocketServerRunner:
         await server_socket_io.server_io.socket_input.run_thread()
 
         while True:
-            await server_socket_io.accept()
             await server_socket_io.communication()

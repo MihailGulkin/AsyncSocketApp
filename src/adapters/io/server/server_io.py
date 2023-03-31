@@ -5,7 +5,7 @@ from src.domain.dto import AcceptedClient
 from src.domain.interfaces import BaseSocket
 
 
-class ServerSocketIO:
+class BaseServerSocketIO:
     def __init__(
             self,
             server: BaseSocket,
@@ -34,14 +34,6 @@ class ServerSocketIO:
     async def _close_all_connection(self):
         for client in self.clients:
             client.client_socket.close()
-
-    async def communication(self):
-        if self.server_io.socket_input.value == 'exit':
-            await self._close_all_connection()
-            exit()
-        await self._send_information_for_clients()
-        await self._get_information_for_clients()
-        await self._accept()
 
     async def _send_information_for_clients(self):
         if self.server_io.socket_input.value:

@@ -1,5 +1,5 @@
-from src.adapters.io.user_input import UserInput
-from src.adapters.io.write_message_to_file import SocketWriteToFile
+from src.adapters.io.base_io.user_input import UserInput
+from src.adapters.io.base_io.write_message_to_file import SocketWriteToFile
 
 
 class SocketIO:

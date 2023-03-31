@@ -1,13 +1,13 @@
 import socket
 
 from src.adapters.io import SocketIO
-from src.client.client_configurate import ClientSocketConfigurate
+from src.domain.interfaces import BaseSocket
 
 
 class ClientSocketIO:
     def __init__(
             self,
-            client: ClientSocketConfigurate,
+            client: BaseSocket,
             socket_io: SocketIO
     ):
         self.client = client
@@ -20,15 +20,15 @@ class ClientSocketIO:
         if self.client_io.socket_input.value == 'exit':
             await self._close_all_connection()
             exit()
-        await self.send_information_for_server()
-        await self.get_information_for_server()
+        await self._send_information_for_server()
+        await self._get_information_for_server()
 
-    async def send_information_for_server(self):
+    async def _send_information_for_server(self):
         if self.client_io.socket_input.value:
             self.client.socket.send(self.client_io.socket_input.value.encode())
             await self.client_io.socket_input.run_thread()
 
-    async def get_information_for_server(self):
+    async def _get_information_for_server(self):
         try:
             request = self.client.socket.recv(1024).decode()
         except socket.timeout:
