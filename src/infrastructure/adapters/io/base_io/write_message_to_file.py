@@ -2,11 +2,11 @@ import threading
 
 
 class SocketWriteToFile:
-    def __init__(self, file_name: str) -> None:
-        self.file_name = file_name
+    def __init__(self, file_path: str) -> None:
+        self.file_path = file_path
 
     def _write_message(self, message: str) -> None:
-        with open(self.file_name, 'a+', encoding='utf-8') as file:
+        with open(self.file_path, 'a+', encoding='utf-8') as file:
             file.write(f'{message}\n')
 
     async def write_message(self, message: str) -> None:

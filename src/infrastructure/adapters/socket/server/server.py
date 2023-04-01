@@ -1,11 +1,11 @@
 import socket
 
-from src.adapters.io import SocketIO
 from src.domain.dto import AcceptedClient
 from src.domain.interfaces import BaseSocket
+from src.infrastructure.adapters.io import SocketIO
 
 
-class ServerSocketIO:
+class BaseServerSocket:
     def __init__(
             self,
             server: BaseSocket,
@@ -31,17 +31,9 @@ class ServerSocketIO:
             f"Client connected from {self.clients[-1].client_address}"
         )
 
-    async def _close_all_connection(self):
+    async def _close_all_connections(self):
         for client in self.clients:
             client.client_socket.close()
-
-    async def communication(self):
-        if self.server_io.socket_input.value == 'exit':
-            await self._close_all_connection()
-            exit()
-        await self._send_information_for_clients()
-        await self._get_information_for_clients()
-        await self._accept()
 
     async def _send_information_for_clients(self):
         if self.server_io.socket_input.value:
