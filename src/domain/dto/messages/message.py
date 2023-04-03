@@ -11,5 +11,6 @@ class MessageCommandParser:
 
 @dataclasses.dataclass
 class ServerAnswer:
-    to_client: Client
-    message: str
+    receiver: Client
+    message_receiver: str
+    sender_message: str

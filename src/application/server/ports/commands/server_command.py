@@ -48,8 +48,11 @@ class ServerCommand(BaseServerCommand):
             case MessageCommand.MESSAGE_TO_USER:
                 answer_ = answer.create_message_to_user()
                 if not isinstance(answer_, str):
-                    answer_.to_client.client_socket.send(
-                        answer_.message.encode()
+                    answer_.receiver.client_socket.send(
+                        answer_.message_receiver.encode()
+                    )
+                    client.client_socket.send(
+                        answer_.sender_message.encode()
                     )
                     return
                 client.client_socket.send(

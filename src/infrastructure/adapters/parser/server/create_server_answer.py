@@ -34,7 +34,8 @@ class CreateServerAnswer:
         msg = self.message_parser.pars_command()
         if client := self.client_repo.find_by_id(msg.to_user):
             return ServerAnswer(
-                to_client=client,
-                message=f'User: {self.client.client_name} send you message: {msg.content}'
+                receiver=client,
+                message_receiver=f'User: {self.client.client_name} send you message: {msg.content}',
+                sender_message=f'Message successfully send to user: {self.client.client_id} - {self.client.client_name}'
             )
         return 'User not found'
