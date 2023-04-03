@@ -11,6 +11,8 @@ class BaseSocketConfig(Protocol):
     SOCKET_TIMEOUT: float
     SERVER_HOST: str
     SERVER_PORT: int
+    SERVER_LISTEN: int
+    RECV: int
 
 
 class BaseConfig(Protocol):

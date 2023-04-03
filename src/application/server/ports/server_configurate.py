@@ -17,5 +17,5 @@ class ServerSocketConfigurate(BaseSocket):
         server_socket.settimeout(Config.Socket.SOCKET_TIMEOUT)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((self.address.host, self.address.port))
-        server_socket.listen(5)
+        server_socket.listen(self.config.SERVER_LISTEN)
         return server_socket

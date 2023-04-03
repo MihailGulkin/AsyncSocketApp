@@ -1,4 +1,4 @@
-from src.infrastructure.adapters.socket.client.client import BaseClient
+from src.infrastructure.adapters.socket.client import BaseClient
 
 
 class ClientSocket(BaseClient):

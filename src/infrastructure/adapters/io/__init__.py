@@ -1,1 +1,1 @@
-from src.infrastructure.adapters.io.base_io.socket_io import SocketIO
+from src.infrastructure.adapters.io.base_io.socket_io import BaseSocketIO

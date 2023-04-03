@@ -1,6 +1,6 @@
-from .server import *
+from .server.server import *
 
 __all__ = [
     'Address',
-    'AcceptedClient'
+    'Client'
 ]

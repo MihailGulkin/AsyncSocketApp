@@ -1,14 +1,14 @@
 import socket
 
 from src.domain.interfaces import BaseSocket
-from src.infrastructure.adapters.io import SocketIO
+from src.infrastructure.adapters.io import BaseSocketIO
 
 
 class BaseClient:
     def __init__(
             self,
             client: BaseSocket,
-            socket_io: SocketIO
+            socket_io: BaseSocketIO
     ):
         self.client = client
         self.client_io = socket_io
@@ -19,11 +19,11 @@ class BaseClient:
     async def _send_information_on_server(self):
         if self.client_io.socket_input.value:
             self.client.socket.send(self.client_io.socket_input.value.encode())
-            await self.client_io.socket_input.run_thread()
+            await self.client_io.socket_input.get_input()
 
     async def _retrieve_information_from_server(self):
         try:
-            request = self.client.socket.recv(1024).decode()
+            request = self.client.socket.recv(self.client.config.RECV).decode()
         except socket.timeout:
             return
         if request:

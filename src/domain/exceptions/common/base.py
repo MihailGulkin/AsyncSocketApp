@@ -1,0 +1,2 @@
+class BaseSocketException(BaseException):
+    pass

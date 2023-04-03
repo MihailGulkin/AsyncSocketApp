@@ -10,3 +10,5 @@ class Config:
         SOCKET_TIMEOUT = 0.1
         SERVER_HOST = 'localhost'
         SERVER_PORT = 8000
+        SERVER_LISTEN = 5
+        RECV = 1024

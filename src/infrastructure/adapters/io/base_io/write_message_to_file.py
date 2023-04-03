@@ -1,9 +1,11 @@
 import threading
 
+from src.domain.interfaces.io import BaseSocketWriteToFile
 
-class SocketWriteToFile:
+
+class SocketWriteToFile(BaseSocketWriteToFile):
     def __init__(self, file_path: str) -> None:
-        self.file_path = file_path
+        super().__init__(file_path=file_path)
 
     def _write_message(self, message: str) -> None:
         with open(self.file_path, 'a+', encoding='utf-8') as file:

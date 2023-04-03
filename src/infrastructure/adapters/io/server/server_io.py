@@ -1,8 +1,8 @@
 from src.domain.dto.config import BasePathsConfig
-from src.infrastructure.adapters.io import SocketIO
+from src.infrastructure.adapters.io import BaseSocketIO
 
 
-class ServerSocketIO(SocketIO):
+class ServerSocketIO(BaseSocketIO):
     def __init__(self, file_name: str, path_config: BasePathsConfig):
         super().__init__(file_name, path_config)
 

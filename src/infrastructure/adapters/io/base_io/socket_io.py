@@ -7,7 +7,7 @@ from src.infrastructure.adapters.io.base_io.write_message_to_file import (
 )
 
 
-class SocketIO(ABC):
+class BaseSocketIO(ABC):
     def __init__(
             self,
             file_name: str,
