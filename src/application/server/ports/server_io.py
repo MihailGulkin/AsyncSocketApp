@@ -10,6 +10,7 @@ from src.infrastructure.adapters.socket.server import BaseServer
 class ServerSocket(BaseServer):
     def __init__(
             self,
+            *,
             server: BaseSocket,
             socket_io: BaseSocketIO,
             repo: BaseClientsRepository,

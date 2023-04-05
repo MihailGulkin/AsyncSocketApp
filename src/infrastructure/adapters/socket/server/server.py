@@ -11,6 +11,7 @@ from src.infrastructure.adapters.io import BaseSocketIO
 class BaseServer:
     def __init__(
             self,
+            *,
             server: BaseSocket,
             socket_io: BaseSocketIO,
             client_repo: BaseClientsRepository,
