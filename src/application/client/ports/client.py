@@ -1,7 +1,7 @@
-from src.application.client.ports.client_configurate import (
+from src.application.client.ports.services import (
+    ClientSocket,
     ClientSocketConfigurate
 )
-from src.application.client.ports.client_io import ClientSocket
 
 from src.domain.dto.config.config import BaseConfig
 from src.domain.exceptions.client.client import ServerNotStarted

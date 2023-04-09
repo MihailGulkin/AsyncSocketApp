@@ -1,14 +1,16 @@
 from src.application.server.ports.commands.server_command import ServerCommand
-from src.application.server.ports.server_io import ServerSocket
-from src.domain.dto.config import BaseConfig
-
-from src.application.server.ports.server_configurate import (
-    ServerSocketConfigurate
+from src.application.server.ports.services import (
+    ServerSocketConfigurate,
+    ServerSocket
 )
+
+from src.domain.dto.config import BaseConfig
 from src.domain.interfaces.base_runner import BaseSocketRunner
+
 from src.infrastructure.adapters.io.server import ServerSocketIO
-from src.infrastructure.adapters.repositories.client_repo import \
+from src.infrastructure.adapters.repositories.client_repo import (
     ClientsRepository
+)
 
 
 class SocketServerRunner(BaseSocketRunner):

@@ -17,7 +17,7 @@ class ClientsRepository(BaseClientsRepository):
         except IndexError:
             raise StopIteration
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.clients)
 
     @property
