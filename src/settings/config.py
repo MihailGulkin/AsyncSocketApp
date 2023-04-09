@@ -1,10 +1,11 @@
+import os
 from pathlib import Path
 
 
 class Config:
     class Paths:
         BASE_DIR = Path(__file__).absolute().parent.parent
-        MESSAGES_DIR = BASE_DIR / 'presentation\\messages'
+        MESSAGES_DIR = BASE_DIR / os.path.join('presentation', 'messages')
 
     class Socket:
         SOCKET_TIMEOUT = 0.1
