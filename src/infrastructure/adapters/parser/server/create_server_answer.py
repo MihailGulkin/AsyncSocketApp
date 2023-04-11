@@ -36,6 +36,6 @@ class CreateServerAnswer:
             return ServerAnswer(
                 receiver=client,
                 message_receiver=f'User: {self.client.client_name} send you message: {msg.content}',
-                sender_message=f'Message successfully send to user: {self.client.client_id} - {self.client.client_name}'
+                sender_message=f'Message successfully send to user: {client.client_id} - {client.client_name}'
             )
         return 'User not found'
