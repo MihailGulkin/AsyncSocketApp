@@ -1,3 +1,4 @@
+import os
 from abc import ABC, abstractmethod
 
 from src.domain.dto.config import BasePathsConfig
@@ -27,3 +28,6 @@ class BaseSocketIO(ABC):
         :return:
         """
         pass
+
+    def delete_messages_file(self) -> None:
+        os.remove(self.socket_output.file_path)

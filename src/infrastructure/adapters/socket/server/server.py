@@ -46,6 +46,7 @@ class BaseServer:
     async def _close_all_connections(self):
         for client in self.client_repo:
             client.client_socket.close()
+        self.server_io.delete_messages_file()
 
     async def _send_information_for_clients(self):
         if self.server_io.socket_input.value:
