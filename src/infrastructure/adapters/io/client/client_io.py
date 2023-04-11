@@ -2,6 +2,8 @@ import os.path
 
 from src.domain.dto.config import BasePathsConfig
 from src.infrastructure.adapters.io import BaseSocketIO
+from src.infrastructure.adapters.io.utils.generate_random_value import \
+    generate_string
 
 
 class ClientSocketIO(BaseSocketIO):
@@ -11,5 +13,5 @@ class ClientSocketIO(BaseSocketIO):
     def create_file_path(self, file_name: str) -> str:
         return os.path.join(
             self.path_config.MESSAGES_DIR,
-            f'client_{file_name}.txt'
+            f'client_{file_name}_{generate_string()}.txt'
         )

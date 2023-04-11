@@ -14,6 +14,7 @@ class BaseClient:
         self.client_io = socket_io
 
     async def _close_all_connection(self):
+        self.client_io.delete_messages_file()
         self.client.socket.close()
 
     async def _send_information_on_server(self):
