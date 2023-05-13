@@ -28,5 +28,9 @@ class BaseClientsRepository(ABC):
         pass
 
     @abstractmethod
+    def remove(self, client: Client) -> None:
+        pass
+
+    @abstractmethod
     def find_by_id(self, pk: int) -> Client | None:
         pass

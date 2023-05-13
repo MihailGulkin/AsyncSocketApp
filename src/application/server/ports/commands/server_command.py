@@ -37,6 +37,9 @@ class ServerCommand(BaseServerCommand):
             message=message
         )
         match answer.message_parser.get_message_command():
+            case MessageCommand.EXIT:
+                self.client_repo.remove(client)
+
             case MessageCommand.TEXT_TO_SERVER:
                 await self.socket_io.socket_output.write_message(
                     answer.create_message_to_server()

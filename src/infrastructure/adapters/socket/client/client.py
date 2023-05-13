@@ -1,5 +1,6 @@
 import socket
 
+from src.domain.consts.client_messages import EXIT
 from src.domain.interfaces import BaseSocket
 from src.infrastructure.adapters.io import BaseSocketIO
 
@@ -21,6 +22,9 @@ class BaseClient:
         if self.client_io.socket_input.value:
             self.client.socket.send(self.client_io.socket_input.value.encode())
             await self.client_io.socket_input.get_input()
+
+    async def _send_last_exit_message(self):
+        self.client.socket.send(EXIT.encode())
 
     async def _retrieve_information_from_server(self):
         try:

@@ -27,6 +27,9 @@ class ClientsRepository(BaseClientsRepository):
     def append(self, client: Client) -> None:
         self.clients.append(client)
 
+    def remove(self, client: Client) -> None:
+        self.clients.remove(client)
+
     def find_by_id(self, pk: int) -> Client | None:
         for client in self.clients:
             if client.client_id == pk:

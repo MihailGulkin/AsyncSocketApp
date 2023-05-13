@@ -9,6 +9,8 @@ class ClientMessageParser:
     def get_message_command(self) -> MessageCommand | None:
         if self.message == 'list':
             return MessageCommand.LIST_OF_USER
+        if self.message == 'exit':
+            return MessageCommand.EXIT
         message_ = self.message.split(' - ')
         try:
             if message_[0] == 'message':
